@@ -5,16 +5,16 @@ namespace Battle_Simulator
 {
     public partial class MainWindow : Window
     {
-        private int heroHP = 100;
-        private int enemyHP = 100;
+        public int heroHP = 100;
+        public int enemyHP = 100;
 
-        private Button AttackButtonControl => (Button)FindName("AttackButton");
-        private Button SpecialAttackButtonControl => (Button)FindName("SpecialAttackButton");
-        private TextBlock HeroHpTextControl => (TextBlock)FindName("HeroHpText");
-        private TextBlock EnemyHpTextControl => (TextBlock)FindName("EnemyHpText");
-        private ProgressBar HeroHpBarControl => (ProgressBar)FindName("HeroHpBar");
-        private ProgressBar EnemyHpBarControl => (ProgressBar)FindName("EnemyHpBar");
-        private TextBox BattleLogControl => (TextBox)FindName("BattleLog");
+        public Button AttackButtonControl => (Button)FindName("AttackButton");
+        public Button SpecialAttackButtonControl => (Button)FindName("SpecialAttackButton");
+        public TextBlock HeroHpTextControl => (TextBlock)FindName("HeroHpText");
+        public TextBlock EnemyHpTextControl => (TextBlock)FindName("EnemyHpText");
+        public ProgressBar HeroHpBarControl => (ProgressBar)FindName("HeroHpBar");
+        public ProgressBar EnemyHpBarControl => (ProgressBar)FindName("EnemyHpBar");
+        public TextBox BattleLogControl => (TextBox)FindName("BattleLog");
 
         public MainWindow()
         {
@@ -23,7 +23,7 @@ namespace Battle_Simulator
            
         }
 
-        private void AttackButton_Click(object sender, RoutedEventArgs e)
+        public void AttackButton_Click(object sender, RoutedEventArgs e)
         {
             AddBattleMessage("Hero attacked and dealt 15 damage to the monster.");
             enemyHP -= 15;
@@ -39,9 +39,9 @@ namespace Battle_Simulator
             FinishRound();
         }
 
-        private void SpecialAttackButton_Click(object sender, RoutedEventArgs e)
+        public void SpecialAttackButton_Click(object sender, RoutedEventArgs e)
         {
-            const int specialDamage = 30;
+             int specialDamage = 30;
 
             if (Random.Shared.Next(100) < 40)
             {
@@ -65,7 +65,7 @@ namespace Battle_Simulator
             FinishRound();
         }
 
-        private void EnemyAttack()
+        public void EnemyAttack()
         {
             AddBattleMessage("Monster attacked and dealt 10 damage to the hero.");
             heroHP -= 10;
@@ -73,7 +73,7 @@ namespace Battle_Simulator
             UpdateHealthDisplay();
         }
 
-        private bool IsBattleOver()
+       public bool IsBattleOver()
         {
             if (enemyHP <= 0)
             {
@@ -92,19 +92,19 @@ namespace Battle_Simulator
             return false;
         }
 
-        private void FinishRound()
+        public void FinishRound()
         {
             AddBattleMessage("Round finished.");
             IsBattleOver();
         }
 
-        private void EndBattle()
+       public void EndBattle()
         {
             AttackButtonControl.IsEnabled = false;
             SpecialAttackButtonControl.IsEnabled = false;
         }
 
-        private void UpdateHealthDisplay()
+        public void UpdateHealthDisplay()
         {
             HeroHpTextControl.Text = $"HP: {heroHP} / 100";
             EnemyHpTextControl.Text = $"HP: {enemyHP} / 100";
@@ -114,7 +114,7 @@ namespace Battle_Simulator
             EnemyHpBarControl.Value = enemyHP;
         }
 
-        private void AddBattleMessage(string message)
+        public void AddBattleMessage(string message)
         {
             BattleLogControl.AppendText(message + Environment.NewLine);
             BattleLogControl.ScrollToEnd();
